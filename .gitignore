@@ -1,0 +1,9 @@
+**/.DS_Store
+.DS_Store
+**/node_modules
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+*.pyc

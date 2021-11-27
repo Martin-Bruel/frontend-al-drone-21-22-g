@@ -1,0 +1,2 @@
+cd docker
+./logs.sh

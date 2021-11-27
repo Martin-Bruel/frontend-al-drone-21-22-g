@@ -1,0 +1,56 @@
+version: "3.9"
+
+services:
+
+  truck:
+      image: delivery-drone/truck
+      ports:
+        - "8085:8085"
+      environment:
+        - APP_ENV=prod
+
+  drone-alpha:
+      image: delivery-drone/drone
+      ports:
+        - "8087:8087"
+      environment:
+        - DRONE_NAME=alpha
+        - DRONE_HOST=drone-alpha
+        - DRONE_PORT=8087
+        - DRONE_CAPACITY=1
+        - APP_ENV=prod
+      depends_on:
+        - "truck"
+
+  drone-beta:
+      image: delivery-drone/drone
+      ports:
+        - "8088:8088"
+      environment:
+        - DRONE_NAME=beta
+        - DRONE_HOST=drone-beta
+        - DRONE_PORT=8088
+        - DRONE_CAPACITY=1
+        - APP_ENV=prod
+      depends_on:
+        - "truck"
+
+  drone-charly:
+      image: delivery-drone/drone
+      ports:
+        - "8089:8089"
+      environment:
+        - DRONE_NAME=charly
+        - DRONE_HOST=drone-charly
+        - DRONE_PORT=8089
+        - DRONE_CAPACITY=1
+        - APP_ENV=prod
+      depends_on:
+        - "truck"
+
+  warehouse:
+      image: delivery-drone/warehouse
+      ports:
+        - "8086:8086"
+      environment:
+        - APP_ENV=prod

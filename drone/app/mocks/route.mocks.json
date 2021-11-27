@@ -1,0 +1,31 @@
+[
+  {
+    "id": 0,
+    "start": 1635871055.227,
+    "itinary": {
+      "steps": [
+        {
+          "latitude": -10,
+          "longitude": 18,
+          "deliveryId": 4
+        },
+        {
+          "latitude": -10,
+          "longitude": 28,
+          "deliveryId": 3
+        },
+        {
+          "latitude": -10,
+          "longitude": 38,
+          "deliveryId": 2
+        }
+      ],
+      "start": {
+        "latitude": 0,
+        "longitude": 0
+      }
+    },
+    "step": 0,
+    "lastdate": 1635871055.227
+  }
+]
