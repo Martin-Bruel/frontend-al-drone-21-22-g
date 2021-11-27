@@ -128,4 +128,8 @@ response : 200 OK
 
 ### Diagramme classe
 
+![plot](./classes.png)
+
 ### Diagramme architecture
+
+![plot](./architecture.png)
