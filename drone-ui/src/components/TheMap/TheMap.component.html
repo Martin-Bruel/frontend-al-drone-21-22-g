@@ -1,0 +1,6 @@
+<div ref="map-root" class="map"></div>
+<div v-if="mapLoaded">
+  <div v-for="drone in droneList" :key="drone.id">
+    <Drone :drone="drone"></Drone>
+  </div>
+</div>
