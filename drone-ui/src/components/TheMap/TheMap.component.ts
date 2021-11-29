@@ -53,7 +53,7 @@ export default class TheMap extends Vue {
             layers: [
                 new TileLayer({
                     source: new OSM({
-                        // url: 'https://maps.geoapify.com/v1/tile/dark-matter/{z}/{x}/{y}.png?apiKey=2d9839952d2a4e5eaa3c680fb0ba5589'
+                        url: 'https://maps.geoapify.com/v1/tile/dark-matter/{z}/{x}/{y}.png?apiKey=2d9839952d2a4e5eaa3c680fb0ba5589'
                     })
                 }),
                 new Graticule({

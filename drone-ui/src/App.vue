@@ -15,5 +15,6 @@ export default class App extends Vue {}
 
 html,body{
   margin: 0;
+  overflow: hidden;
 }
 </style>
