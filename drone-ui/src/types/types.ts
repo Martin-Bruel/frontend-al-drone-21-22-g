@@ -12,13 +12,13 @@ export enum DeliveryStatus {
 export interface Position {
     latitude: number,
     longitude: number
-};
+}
 
 export interface Deliveries {
     id: number,
     position: Position,
     deliveryStatus: DeliveryStatus
-};
+}
 
 export interface DroneType {
     id: number,
@@ -27,4 +27,4 @@ export interface DroneType {
     deliveries: Array<Deliveries>,
     capacity: number,
     position: Position
-};
+}

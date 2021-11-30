@@ -1,6 +1,6 @@
 import { InjectionKey } from 'vue';
 import { DroneStatus, DroneType, Position } from '@/types/types';
-import { createStore, useStore as baseUseStore, Store } from 'vuex'
+import { createStore, Store } from 'vuex'
 
 export interface State {
     truckPosition: Position,
@@ -19,7 +19,7 @@ export const store = createStore<State>({
             {
                 id: 0,
                 name: 'a',
-                status: DroneStatus.FLYINGTODELIVERY,
+                status: DroneStatus.READY,
                 deliveries: [],
                 capacity: 1,
                 position: {
@@ -41,7 +41,7 @@ export const store = createStore<State>({
             {
                 id: 2,
                 name: 'c',
-                status: DroneStatus.FLYINGTODELIVERY,
+                status: DroneStatus.FLYINTOTRUCK,
                 deliveries: [],
                 capacity: 1,
                 position: {
@@ -52,7 +52,7 @@ export const store = createStore<State>({
             {
                 id: 3,
                 name: 'd',
-                status: DroneStatus.FLYINGTODELIVERY,
+                status: DroneStatus.LOST,
                 deliveries: [],
                 capacity: 1,
                 position: {

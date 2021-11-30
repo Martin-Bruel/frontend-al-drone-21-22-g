@@ -1,6 +1,11 @@
 import { Options, Vue } from "vue-class-component";
+import { DroneType, Position } from "@/types/types";
+import { useStore } from "vuex";
+import { key } from "@/store/store";
+
 import Drone from '@/components/Drone.vue'
-import { DroneType } from "@/types/types";
+import TheTruck from "@/components/TheTruck.vue";
+import Line from "@/components/Line.vue";
 
 import Map from 'ol/Map'
 import TileLayer from 'ol/layer/Tile'
@@ -10,15 +15,13 @@ import View from 'ol/View'
 import Stroke from 'ol/style/Stroke'
 import Feature from 'ol/Feature'
 import Zoom from 'ol/control/Zoom'
-
 import Point from 'ol/geom/Point'
-import Geometry from "ol/geom/Geometry";
-import { useStore } from "vuex";
-import { key } from "@/store/store";
 
 @Options({
     components: {
-        Drone
+        Drone,
+        TheTruck,
+        Line
     }
 })
 export default class TheMap extends Vue {
@@ -26,15 +29,16 @@ export default class TheMap extends Vue {
     map: any = undefined;
     mapLoaded = false;
     droneList: Array<DroneType> = [];
+    truckPosition: Position = { latitude:0, longitude:0 };
 
     store = useStore(key);
 
-    computeDroneList() {
+    updateElements() {
         this.droneList = [];
-        let feature: Feature<Geometry>;
+        const trucPositionPixels = this.getPixelFromCoordinate(this.store.getters.truck);
+        this.truckPosition = { latitude:trucPositionPixels[0], longitude:trucPositionPixels[1] };
         (this.store.getters.drones as Array<DroneType>).forEach(drone => {
-            feature = new Feature({ geometry: new Point([drone.position.longitude, drone.position.latitude]).transform('EPSG:4326', 'EPSG:3857') });
-            const coordinates = this.map.getPixelFromCoordinate((feature.getGeometry() as Point).getCoordinates());
+            const coordinates = this.getPixelFromCoordinate(drone.position);
             this.droneList.push({
                 ...drone,
                 position: {
@@ -45,6 +49,14 @@ export default class TheMap extends Vue {
         });
     }
 
+    getPixelFromCoordinate(position: Position): number[]{
+        const feature = new Feature(
+            {
+                geometry: new Point([position.longitude, position.latitude]).transform('EPSG:4326', 'EPSG:3857')
+            });
+        return this.map.getPixelFromCoordinate((feature.getGeometry() as Point).getCoordinates());
+    }
+
     ///// Component Hooks
 
     mounted() {
@@ -53,7 +65,7 @@ export default class TheMap extends Vue {
             layers: [
                 new TileLayer({
                     source: new OSM({
-                        url: 'https://maps.geoapify.com/v1/tile/dark-matter/{z}/{x}/{y}.png?apiKey=2d9839952d2a4e5eaa3c680fb0ba5589'
+                        // url: 'https://maps.geoapify.com/v1/tile/dark-matter/{z}/{x}/{y}.png?apiKey=2d9839952d2a4e5eaa3c680fb0ba5589'
                     })
                 }),
                 new Graticule({
@@ -75,11 +87,11 @@ export default class TheMap extends Vue {
         this.map.once('postrender', () => {
             console.log('>>> Map Loaded !')
             this.mapLoaded = true;
-            this.computeDroneList();
+            this.updateElements();
         });
         this.map.on(['moveend', 'pointerdrag'], () => {
             // console.log('Map moved (end) / dragged');
-            this.computeDroneList();
+            this.updateElements();
         });
     }
 }
