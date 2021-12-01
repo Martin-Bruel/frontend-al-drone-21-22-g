@@ -4,8 +4,8 @@ import lombok.Getter;
 
 @Getter
 public class PositionDto {
-    private String latitude;
-    private String longitude;
+    private double latitude;
+    private double longitude;
 
     @Override
     public String toString() {

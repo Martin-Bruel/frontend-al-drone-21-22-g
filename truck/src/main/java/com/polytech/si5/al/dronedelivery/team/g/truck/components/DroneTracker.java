@@ -1,8 +1,10 @@
 package com.polytech.si5.al.dronedelivery.team.g.truck.components;
 
 import com.polytech.si5.al.dronedelivery.team.g.truck.constants.Api;
+import com.polytech.si5.al.dronedelivery.team.g.truck.dto.DronePositionDto;
 import com.polytech.si5.al.dronedelivery.team.g.truck.dto.PositionDto;
 import com.polytech.si5.al.dronedelivery.team.g.truck.entities.Drone;
+import com.polytech.si5.al.dronedelivery.team.g.truck.entities.Position;
 import com.polytech.si5.al.dronedelivery.team.g.truck.exceptions.UnreachableServiceException;
 import com.polytech.si5.al.dronedelivery.team.g.truck.interfaces.DroneFinder;
 import com.polytech.si5.al.dronedelivery.team.g.truck.interfaces.DroneStateNotifier;
@@ -10,6 +12,7 @@ import com.polytech.si5.al.dronedelivery.team.g.truck.interfaces.DroneWatcher;
 import com.polytech.si5.al.dronedelivery.team.g.truck.scheduling.CronTaskRegister;
 import com.polytech.si5.al.dronedelivery.team.g.truck.scheduling.SchedulingRunnable;
 import com.polytech.si5.al.dronedelivery.team.g.truck.services.DroneService;
+import com.polytech.si5.al.dronedelivery.team.g.truck.services.TabletService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,12 +43,16 @@ public class DroneTracker implements DroneWatcher {
     @Autowired
     DroneFinder droneFinder;
 
+    @Autowired
+    TabletService tabletService;
+
     private HashMap<Long,SchedulingRunnable> tasks=new HashMap<>();
 
     public void doTracking(Long droneId) throws UnreachableServiceException, InterruptedException {
         Drone drone= droneFinder.findDroneById(droneId);
         try{
             PositionDto position =droneService.getDronePosition(drone);
+            tabletService.publish(new DronePositionDto(new Position(position.getLatitude(), position.getLongitude()), droneId));
             logger.info("Received position of drone "+droneId +": "+position);
         }catch (Exception e){
             retryDoTracking(drone);

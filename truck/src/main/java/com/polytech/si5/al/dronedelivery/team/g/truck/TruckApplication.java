@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication
 @EnableJpaRepositories
 public class TruckApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(TruckApplication.class, args);
 	}
