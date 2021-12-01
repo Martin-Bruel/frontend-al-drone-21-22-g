@@ -7,3 +7,27 @@
 *.iml
 *.ipr
 *.pyc
+
+### Gitignore drone-ui ###
+drone-ui/**/.DS_Store
+drone-ui/**/node_modules
+drone-ui/**/dist
+
+# local env files
+drone-ui/**/.env.local
+drone-ui/**/.env.*.local
+
+# Log files
+drone-ui/**/npm-debug.log*
+drone-ui/**/yarn-debug.log*
+drone-ui/**/yarn-error.log*
+drone-ui/**/pnpm-debug.log*
+
+# Editor directories and files
+drone-ui/**/.idea
+drone-ui/**/.vscode
+drone-ui/**/*.suo
+drone-ui/**/*.ntvs*
+drone-ui/**/*.njsproj
+drone-ui/**/*.sln
+drone-ui/**/*.sw?

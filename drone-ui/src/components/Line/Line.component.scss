@@ -1,0 +1,13 @@
+.line{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50px;
+    height: 50px;
+
+    svg{
+        height: 100vh;
+        width: 100vw;
+        pointer-events: none;
+    }
+}
