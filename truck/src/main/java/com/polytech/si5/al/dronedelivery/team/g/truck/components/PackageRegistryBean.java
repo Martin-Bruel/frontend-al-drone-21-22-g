@@ -30,6 +30,15 @@ public class PackageRegistryBean implements PackageFinder, PackageRegistration, 
 
 
     @Override
+    public List<Delivery> getAllDeliveries() {
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Delivery> cq = builder.createQuery(Delivery.class);
+        Root<Delivery> delivery = cq.from(Delivery.class);
+        cq.select(delivery);
+        return entityManager.createQuery(cq).getResultList();
+    }
+
+    @Override
     @Transactional
     public List<Delivery> getDeliverablePackages() {
         logger.info("Get Packages");

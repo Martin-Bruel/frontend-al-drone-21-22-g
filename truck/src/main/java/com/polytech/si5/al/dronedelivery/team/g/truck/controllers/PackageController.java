@@ -7,6 +7,8 @@ import com.polytech.si5.al.dronedelivery.team.g.truck.interfaces.PackageRegistra
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class PackageController {
 
@@ -19,6 +21,11 @@ public class PackageController {
     @PostMapping("/package/add")
     public void addPackages(@RequestBody DeliveryDto deliveryDto){
         packageRegistration.registerDelivery(new Delivery(deliveryDto));
+    }
+
+    @PostMapping("/package/addAll")
+    public void addPackages(@RequestBody List<DeliveryDto> deliveryDtos){
+        deliveryDtos.forEach((deliveryDto -> packageRegistration.registerDelivery(new Delivery(deliveryDto))));
     }
 
     @GetMapping("/packages/{id}")

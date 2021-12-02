@@ -10,6 +10,7 @@
    <a href="https://github.com/DavidLebrisse">Lebrisse David</a>,
    <a href="https://github.com/NathanMeulle">Meulle Nathan</a>,	
    <a href="https://github.com/kevinushaka">Ushaka Kevin</a>,
+  <a href="https://github.com/Nakutaka">Col Alexandre</a>,
    <br /><br />
    <img src="https://github.com/pns-si5-al-course/al-drone-21-22-al-drone-21-22-g/blob/main/drone-delivery.jpg" width="400">
   </p>
@@ -21,7 +22,8 @@
 * [A propos du projet](#a-propos-du-projet)
 * [Installation](#installation)
   * [Prérequis](#prérequis)
-  * [Compilation](#compilation)
+  * [Exécution standard](#exécution-standard)
+  * [Exécution docker](#exécution-docker)
 * [Commandes](#commandes)
   * [Ajout de colis](#ajout-de-colis)
   * [Allocation des colis](#allocation-des-colis)
@@ -57,7 +59,18 @@ Simulartion de livraison de colis par drone depuis un camion
 https://docs.docker.com/compose/install/  
 https://docs.docker.com/engine/install/linux-postinstall/  
 
-### Compilation
+### Exécution standard
+
+Exécution pour un seul drone  
+```
+cd truck
+mvn spring-boot:run
+cd ../drone
+npm install
+npm start
+```
+
+### Exécution docker
 
 ```
 ./prepare.sh
