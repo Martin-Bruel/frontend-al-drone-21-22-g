@@ -1,0 +1,7 @@
+@import './variables.scss';
+
+:export{
+    flying: $drone-color-flying;
+    ready: $drone-color-ready;
+    lost: $drone-color-lost;
+}

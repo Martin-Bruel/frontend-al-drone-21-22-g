@@ -66,6 +66,9 @@ export const store = createStore<State>({
         truck: (state) => {
             return state.truckPosition;
         },
+        truckPositionAsArray: (state) => {
+            return [state.truckPosition.longitude, state.truckPosition.latitude];
+        },
         drones: (state) => {
             return state.drones;
         },

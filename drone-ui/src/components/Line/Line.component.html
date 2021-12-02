@@ -1,11 +1,10 @@
-<div class="line">
+<div class="line" :style="{'--drone-color': color()}">
     <svg>
         <line 
             :x1="drone.position.latitude"
             :y1="drone.position.longitude"
             :x2="truckPosition.latitude"
-            :y2="truckPosition.longitude"
-            stroke="black">
+            :y2="truckPosition.longitude">
         </line>
     </svg>
 </div>

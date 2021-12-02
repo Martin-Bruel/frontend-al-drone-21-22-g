@@ -16,6 +16,7 @@ import Stroke from 'ol/style/Stroke'
 import Feature from 'ol/Feature'
 import Zoom from 'ol/control/Zoom'
 import Point from 'ol/geom/Point'
+import { transform } from 'ol/proj'
 
 @Options({
     components: {
@@ -76,8 +77,8 @@ export default class TheMap extends Vue {
                 })
             ],
             view: new View({
-                zoom: 0,
-                center: [0, 0],
+                zoom: 14,
+                center: [0,0],
                 constrainResolution: true
             })
         });
@@ -85,12 +86,13 @@ export default class TheMap extends Vue {
             className: 'custom-zoom'
         }));
         this.map.once('postrender', () => {
-            console.log('>>> Map Loaded !')
             this.mapLoaded = true;
             this.updateElements();
+            this.map.getView().setCenter(
+                transform(this.store.getters.truckPositionAsArray, 'EPSG:4326', 'EPSG:3857')
+            );
         });
         this.map.on(['moveend', 'pointerdrag'], () => {
-            // console.log('Map moved (end) / dragged');
             this.updateElements();
         });
     }
