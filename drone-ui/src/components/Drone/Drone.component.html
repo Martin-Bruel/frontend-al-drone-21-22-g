@@ -5,7 +5,7 @@
         'top': droneLon + 'px',
         '--drone-color' : droneColor(),
         }"
-    @click="droneInfo()">
+    @click="$emit('droneSelectedEvent', drone.id)">
     <svg 
         xmlns="http://www.w3.org/2000/svg" 
         xmlns:xlink="http://www.w3.org/1999/xlink" 

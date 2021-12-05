@@ -8,7 +8,7 @@ import { droneColor, isFlyingToDelivery, isFlyingToTruck } from '@/helpers/drone
     }
 })
 export default class Drone extends Vue {
-    drone!: DroneType
+    drone!: DroneType;
 
     droneWidth = 50;
     droneLat = this.drone.position.latitude - this.droneWidth/2;

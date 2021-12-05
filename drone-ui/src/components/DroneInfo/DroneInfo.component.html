@@ -1,0 +1,16 @@
+<transition name="drone-info-left">
+    <div v-if="id != -1" class="info-container">
+        <button class="btn-close" @click="$emit('closeInfo')">
+            <svg width="15" height="15">
+                <line x1="0" y1="0" x2="15" y2="15"></line>
+                <line x1="0" y1="15" x2="15" y2="0"></line>
+            </svg>
+        </button>
+        <div class="drone-infos">
+            <div class="name">"{{drone.name}}" Drone</div>
+            <div class="drone-json">
+                {{droneJson}}
+            </div>
+        </div>
+    </div>
+</transition>

@@ -2,7 +2,8 @@
 <div v-if="mapLoaded">
   <TheTruck :position="truckPosition"></TheTruck>
   <div v-for="drone in droneList" :key="drone.id">
-    <Drone :drone="drone"></Drone>
+    <Drone :drone="drone" @drone-selected-event="onDroneSelected"></Drone>
     <Line :drone="drone" :truckPosition="truckPosition"></Line>
   </div>
 </div>
+<DroneInfo :id="droneSelected" @closeInfo="droneSelected = -1"></DroneInfo>
