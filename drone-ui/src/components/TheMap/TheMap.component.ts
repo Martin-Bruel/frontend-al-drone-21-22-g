@@ -63,6 +63,11 @@ export default class TheMap extends Vue {
 
     onDroneSelected(droneId: number){
         this.droneSelected = droneId;
+        const mapView = this.map.getView();
+        mapView.setCenter(
+            transform(this.store.getters.dronePositionAsArray(droneId), 'EPSG:4326', 'EPSG:3857')
+        );
+        mapView.setZoom(17);
         console.log('Drone Selected',this.droneSelected);
     }
 

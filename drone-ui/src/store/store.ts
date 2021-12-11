@@ -74,6 +74,10 @@ export const store = createStore<State>({
         },
         droneById: (state) => (id: number) => {
             return state.drones.find(drone => drone.id === id);
+        },
+        dronePositionAsArray: (state, getters) => (id: number) => {
+            const drone: DroneType = getters.droneById(id);
+            return [drone.position.longitude, drone.position.latitude];
         }
     },
     actions:{}
