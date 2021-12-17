@@ -1,5 +1,6 @@
 import { Options, Vue } from 'vue-class-component'
-import { DroneStatus, DroneType } from '@/types/types'
+import { DroneType } from '@/types/types'
+import { droneColor, isFlyingToDelivery, isFlyingToTruck } from '@/helpers/drone-helper';
 
 @Options({
     props: {
@@ -7,9 +8,8 @@ import { DroneStatus, DroneType } from '@/types/types'
     }
 })
 export default class Drone extends Vue {
-    drone!: DroneType
+    drone!: DroneType;
 
-    droneColor = 'white';
     droneWidth = 50;
     droneLat = this.drone.position.latitude - this.droneWidth/2;
     droneLon = this.drone.position.longitude - this.droneWidth/2;
@@ -18,36 +18,16 @@ export default class Drone extends Vue {
         console.log(this.drone);
     }
 
-    isReady(): boolean{
-         if(this.drone.status === DroneStatus.READY){
-            this.droneColor = '#000069';
-            return true;
-         }
-         return false;
+    droneColor(){
+        return droneColor(this.drone);
     }
 
-    isFlyingToDelivery(): boolean{
-        if(this.drone.status === DroneStatus.FLYINGTODELIVERY){
-            this.droneColor = '#006900';
-            return true;
-        }
-        return false;
+    delivery(){
+        return isFlyingToDelivery(this.drone);
     }
 
-    isFlyingToTruck(): boolean{
-        if(this.drone.status === DroneStatus.FLYINTOTRUCK){
-            this.droneColor = '#006900';
-            return true;
-        }
-        return false;
-    }
-
-    isLost(): boolean{
-        if(this.drone.status === DroneStatus.LOST){
-            this.droneColor = '#690000';
-            return true;
-        }
-        return false;
+    truck(){
+        return isFlyingToTruck(this.drone);
     }
 
     ///// Component Hooks
@@ -55,5 +35,6 @@ export default class Drone extends Vue {
     updated(){
         this.droneLat = this.drone.position.latitude - this.droneWidth/2;
         this.droneLon = this.drone.position.longitude - this.droneWidth/2;
+        droneColor(this.drone);
     }
 }

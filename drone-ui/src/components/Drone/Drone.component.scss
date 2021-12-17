@@ -6,8 +6,6 @@ $drone-color: var(--drone-color);
     height: 50px;
     z-index: 42;
 
-    &.lost{}
-
     svg{
         display: block;
         fill:  $drone-color;
@@ -19,8 +17,8 @@ $drone-color: var(--drone-color);
             
         &:hover {
             transform: scale(1.5);
-            filter: drop-shadow(0px 0px 5px $drone-color);
-            -webkit-filter: drop-shadow(0px 0px 5px $drone-color);
+            filter: drop-shadow(0px 0px 5px var(--drone-color));
+            -webkit-filter: drop-shadow(0px 0px 5px var(--drone-color));
         }
     }
 
