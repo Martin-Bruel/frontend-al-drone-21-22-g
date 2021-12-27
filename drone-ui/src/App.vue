@@ -8,15 +8,14 @@ import { Vue } from 'vue-class-component';
 export default class App extends Vue {
 
   mounted(){
-
-    const connection = new WebSocket('ws://172.27.10.86:3000/');
+    // Change the following ip to the one where the WS has been launched
+    const connection = new WebSocket('ws://192.168.0.45:3000/');
     connection.onopen = function() {
       console.log("ws::open : connection established ");
     }
-    connection.onmessage = (event:any) => {
-      console.log('received: %s', event);
+    connection.onmessage = (event: MessageEvent) => {
+      console.log('received: ', event);
     }
-    
   }  
 }
 </script>

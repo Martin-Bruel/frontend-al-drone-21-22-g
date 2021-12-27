@@ -1,23 +1,13 @@
 [
   {
     "id": 0,
-    "start": 1638309371.328,
+    "start": 1640613381.494,
     "itinary": {
       "steps": [
         {
-          "latitude": 43.61748221775195,
-          "longitude": 7.07255137980926,
+          "latitude": 43.622224,
+          "longitude": 7.056913,
           "deliveryId": 2
-        },
-        {
-          "latitude": 43.622351793172214,
-          "longitude": 7.05677043293009,
-          "deliveryId": 4
-        },
-        {
-          "latitude": 43.6241639686788,
-          "longitude": 7.060041586483106,
-          "deliveryId": 3
         }
       ],
       "start": {
@@ -26,6 +16,6 @@
       }
     },
     "step": 0,
-    "lastdate": 1638309371.328
+    "lastdate": 1640613381.494
   }
 ]

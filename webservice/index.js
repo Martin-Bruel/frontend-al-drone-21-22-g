@@ -12,7 +12,7 @@ wss.on('connection', function connection(ws) {
 
 const client = createClient();
 client.connect().then(() => {
-    client.subscribe('droneInfo', (message) => {
+    client.subscribe('droneTopic', (message) => {
         console.log("Receive: " + message); // 'message'
         sockets.forEach((s) => s.send(message));
     });
