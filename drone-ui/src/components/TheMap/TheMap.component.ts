@@ -74,6 +74,12 @@ export default class TheMap extends Vue {
     ///// Component Hooks
 
     mounted() {
+        this.store.subscribe((mutation, state) => {
+            if(mutation.type === 'updateDrone'){
+                this.updateElements();
+            }
+        });
+
         this.map = new Map({
             target: this.$refs['map-root'] as HTMLElement,
             layers: [

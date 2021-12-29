@@ -80,5 +80,15 @@ export const store = createStore<State>({
             return [drone.position.longitude, drone.position.latitude];
         }
     },
+    mutations:{
+        updateDrone(state, data: {position: Position, droneId: number}){
+            state.drones = state.drones.map(drone => {
+                if(drone.id === data.droneId){
+                    return {...drone, position: data.position};
+                }
+                return drone;
+            });
+        }
+    },
     actions:{}
 })
