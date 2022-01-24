@@ -1,15 +1,38 @@
 <template>
-  <router-view></router-view>
+  <template v-if="!truckConnected">
+    <the-loader v-on:backendStatus="truckResponse($event)"></the-loader>
+  </template>
+  <template v-else>
+    <router-view></router-view>
+  </template>
 </template>
 
 <script lang="ts">
-import { Vue } from 'vue-class-component';
+import { Options, Vue } from 'vue-class-component';
 import { useStore } from 'vuex';
 import { key } from './store/store';
 
+import TheLoader from '@/components/TheLoader.vue';
+import { Truck } from './types/types';
+
+@Options({
+    components: {
+        TheLoader
+    }
+})
 export default class App extends Vue {
 
   store = useStore(key);
+  truckConnected = false;
+
+  truckResponse(truck: Truck){
+    if(truck.available){
+      console.log('From App.vue: Truck is up', truck);
+      this.truckConnected = false;
+    }else{
+      console.log('From App.vue: Truck seems down');
+    }
+  }
 
   mounted(){
     // Change the following ip to the one where the WS has been launched
@@ -23,7 +46,7 @@ export default class App extends Vue {
       this.store.commit('updateDrone',JSON.parse(event.data));
 
     }
-  }  
+  }
 }
 </script>
 
@@ -33,6 +56,7 @@ export default class App extends Vue {
 }
 
 html,body{
+  font-family: sans-serif;
   margin: 0;
   overflow: hidden;
 }

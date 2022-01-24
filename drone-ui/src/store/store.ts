@@ -81,6 +81,10 @@ export const store = createStore<State>({
         }
     },
     mutations:{
+        // TODO : Methode d'initialisation qui set les coords du camion
+        // TODO : voir comment on fait pour après 
+        //  > on attend que les drones soient ajoutés dans l'écran de load ? cool
+        //  > on reste sur la map et on fait encore des requetes ? bof
         updateDrone(state, data: {position: Position, droneId: number}){
             state.drones = state.drones.map(drone => {
                 if(drone.id === data.droneId){

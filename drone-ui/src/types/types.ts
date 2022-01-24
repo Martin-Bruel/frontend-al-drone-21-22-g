@@ -1,3 +1,10 @@
+export interface Truck {
+    available: boolean,
+    deliveries:Array<Delivery>,
+    drones:Array<DroneType>,
+    position: Position | undefined
+}
+
 export enum DroneStatus {
     READY = 'READY',
     FLYINGTODELIVERY = 'FLYINGTODELIVERY',
@@ -14,7 +21,7 @@ export interface Position {
     longitude: number
 }
 
-export interface Deliveries {
+export interface Delivery {
     id: number,
     position: Position,
     deliveryStatus: DeliveryStatus
@@ -24,7 +31,7 @@ export interface DroneType {
     id: number,
     name: string,
     status: DroneStatus,
-    deliveries: Array<Deliveries>,
+    deliveries: Array<Delivery>,
     capacity: number,
     position: Position
 }
